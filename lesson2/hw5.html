@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hw5</title>
+</head>
+<body>
+<script>
+             /* Задача 5
+                5 Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+                где arg1, arg2 – значения аргументов, operation – строка с названием операции. В зависимости от
+                переданного значения операции (использовать switch) выполнить одну из арифметических
+                операций(использовать функции из задания 4) и вернуть полученное значение.
+                 */
+                'use strict';
+                function mathOperation(arg1, arg2, operation){
+    			switch(operation){
+       				 case 'addition':
+           				 return 12 + 6;
+
+       				 case 'subtraction':
+           				 return 24 + 7;
+
+        			 case 'division':
+                      	return 91 / 4;
+
+       				 case 'multiplication':
+           				 return  21 * 21;
+                }
+                }
+
+                alert(mathOperation(91, 4, 'subtraction'));
+
+
+</script>
+</body>
+</html>
