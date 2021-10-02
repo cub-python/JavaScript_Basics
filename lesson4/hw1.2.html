@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        (это обязательное задание) Сделайте в стиле es5, а затем в стиле es6 (по аналогии из дополнительных
+        видео -> 3 примеры наследования -> механика наследования),
+        а) конструктор Post, который принимает параметры author, text, date и сохраняет их как свойства объекта. Объекты
+        типа Post должны иметь метод edit, который будет принимать текст и записывать его в свойство text объекта.
+        б) конструктор AttachedPost, который принимает параметры author, text, date. Проинициализируйте эти свойства с
+        помощью конструктора Post, чтобы не дублировать код. Также в конструкторе AttachedPost должно создаваться
+        свойство highlighted со значением false. Унаследуйте в объектах типа AttachedPost методы из Post.
+        Объекты типа AttachedPost должны иметь метод makeTextHighlighted, который будет назначать свойству
+        highlighted значение true.
+        */
+       // в стиле es5
+        
+        'use strict';
+
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+        Post.prototype.edit = function(text) {
+            this.text = text;
+        }
+
+        const post1 = new Post('Yevtushenko', 'Идут снеги большие,аж до боли светлы,', new Date());
+        console.log(post1);
+        post1.edit('и мои, и чужие заметая следы.');
+        console.log(post1);
+
+
+        function AttachedPost(author, text, date) {
+            Post.call(this, author, text, date);
+            this.highlighted = false;
+        }
+
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+
+        AttachedPost.prototype.makeTextHighlighted = function() {
+            this.highlighted = true;
+        }
+
+        const attached1 = new AttachedPost('Zhvanetsky', 'Все люди, как книги, и мы их читаем,', new Date());
+        console.log(attached1);
+        attached1.makeTextHighlighted();
+        attached1.edit('Кого-то за месяц, кого-то за два.');
+        console.log(attached1);
+        
+        //стиле es6
+
+        class Post1 {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+
+            edit(text) {
+                this.text = text;
+            }
+        }
+
+        const post2 = new Post('Yevtushenko2', 'Быть бессмертным не в силе,но надежда моя:', new Date());
+        console.log(post2);
+        post2.edit('если будет Россия,значит, буду и я.');
+        console.log(post2);
+
+
+        class AttachedPost1 extends Post1 {
+            constructor(author, text, date) {
+                super(author, text, date);
+                this.highlighted = false;
+            }
+
+            makeTextHighlighted() {
+                this.highlighted = true;
+            }
+        }
+
+        const attached2 = new AttachedPost('Zhvanetsky2', 'Кого-то спустя лишь года понимаем,', new Date());
+        console.log(attached2);
+        attached2.makeTextHighlighted();
+        attached2.edit('Кого-то прочесть не дано никогда.');
+        console.log(attached2);
+
+
+
+
+    </script>
+</body>
+</html>
